@@ -16,7 +16,10 @@ function getPlayerChoice() {
         case 'ROCK': return 'Rock';
         case 'PAPER': return 'Paper';
         case 'SCISSORS': return 'Scissors';
-        default: return null;
+        default: {
+            alert('Invalid selection. Please enter rock, paper, or scissors.');
+            return;
+        }
     }
 }
 
@@ -42,8 +45,13 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
+let computerSelection = getComputerChoice();
+let playerSelection;
+
+// if user input invalid, prompt again
+while (playerSelection === undefined)
+    playerSelection =  getPlayerChoice();
+
 
 console.log(playerSelection);
 console.log(computerSelection);
