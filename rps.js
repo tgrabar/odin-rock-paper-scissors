@@ -1,15 +1,19 @@
-// global counters for win/lose/tie
-let gamesWon = 0;
-let gamesLost = 0;
-let gamesTied = 0;
+const score = {
+    gamesWon: 0,
+    gamesLost: 0,
+    gamesTied: 0
+};
 
 const rpsBtn = document.querySelectorAll(".rpsbtn");
+const resetBtn = document.querySelector('.reset-btn');
 
 rpsBtn.forEach((btn) =>
         btn.addEventListener("click", () => {
             playRound(btn.dataset.choice, getComputerChoice())
             }
 ));
+
+resetBtn.addEventListener("click", resetScore);
 
 // game();
 
@@ -29,7 +33,7 @@ function playRound(playerSelection, computerSelection) {
     // check for ties first
     if (playerSelection === computerSelection) {
         result = 'It\'s a tie!';
-        gamesTied++;
+        score.gamesTied++;
     }        
     // check loss conditions
     else if (
@@ -38,16 +42,25 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'Scissors' && computerSelection === 'Rock')
     ) {
         result = 'You lose!';
-        gamesLost++;
+        score.gamesLost++;
     }
         
     else {
         result = 'You win!';
-        gamesWon++;
+        score.gamesWon++;
     }
     
     // display what players chose
     result += ` (You chose: ${playerSelection}, Opponent chose: ${computerSelection}\)`;
     console.log(result);
+    console.log(score);
     return result;
+}
+
+function resetScore() {
+    score.gamesWon = 0;
+    score.gamesLost = 0;
+    score.gamesTied = 0;
+    console.log(score);
+    return
 }
