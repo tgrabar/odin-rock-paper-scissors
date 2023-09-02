@@ -6,6 +6,8 @@ const score = {
 
 const rpsBtn = document.querySelectorAll(".rpsbtn");
 const resetBtn = document.querySelector('.reset-btn');
+const scoreDisplay = document.querySelector('.score-display');
+const resultsLog = document.querySelector('.results-log');
 
 rpsBtn.forEach((btn) =>
         btn.addEventListener("click", () => {
@@ -14,8 +16,6 @@ rpsBtn.forEach((btn) =>
 ));
 
 resetBtn.addEventListener("click", resetScore);
-
-// game();
 
 function getComputerChoice() {
     // get random number between 0-2 and return the result as a string
@@ -33,7 +33,7 @@ function playRound(playerSelection, computerSelection) {
     // check for ties first
     if (playerSelection === computerSelection) {
         result = 'It\'s a tie!';
-        score.gamesTied++;
+        updateScore('gamesTied');
     }        
     // check loss conditions
     else if (
@@ -42,25 +42,31 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'Scissors' && computerSelection === 'Rock')
     ) {
         result = 'You lose!';
-        score.gamesLost++;
+        updateScore('gamesLost');
     }
         
     else {
         result = 'You win!';
-        score.gamesWon++;
+        updateScore('gamesWon');
     }
     
     // display what players chose
     result += ` (You chose: ${playerSelection}, Opponent chose: ${computerSelection}\)`;
     console.log(result);
     console.log(score);
+    
     return result;
+}
+
+function updateScore(result) {
+    score[result]++;
+    scoreDisplay.textContent = `Player: ${score.gamesWon}, Computer: ${score.gamesLost}, Ties: ${score.gamesTied}`;
 }
 
 function resetScore() {
     score.gamesWon = 0;
     score.gamesLost = 0;
     score.gamesTied = 0;
-    console.log(score);
+    scoreDisplay.textContent = `Player: ${score.gamesWon}, Computer: ${score.gamesLost}, Ties: ${score.gamesTied}`;
     return
 }
