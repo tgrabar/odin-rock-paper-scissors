@@ -32,8 +32,8 @@ function playRound(playerSelection, computerSelection) {
 
     // check for ties first
     if (playerSelection === computerSelection) {
-        result = 'It\'s a tie!';
         updateScore('gamesTied');
+        addResult('Tie', playerSelection, computerSelection);
     }        
     // check loss conditions
     else if (
@@ -41,21 +41,15 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === 'Paper' && computerSelection === 'Scissors') ||
         (playerSelection === 'Scissors' && computerSelection === 'Rock')
     ) {
-        result = 'You lose!';
         updateScore('gamesLost');
+        addResult('Loss', playerSelection, computerSelection);
     }
         
     else {
-        result = 'You win!';
         updateScore('gamesWon');
+        addResult('Win', playerSelection, computerSelection);
     }
-    
-    // display what players chose
-    result += ` (You chose: ${playerSelection}, Opponent chose: ${computerSelection}\)`;
-    console.log(result);
-    console.log(score);
-    
-    return result;
+    return;
 }
 
 function updateScore(result) {
@@ -63,10 +57,18 @@ function updateScore(result) {
     scoreDisplay.textContent = `Player: ${score.gamesWon}, Computer: ${score.gamesLost}, Ties: ${score.gamesTied}`;
 }
 
+function addResult(gameResult, playerSelection, computerSelection) {
+    const resultText = document.createElement('div');
+    resultText.classList.add('result-' + gameResult.toLowerCase());
+    resultText.textContent = gameResult + ` (You chose: ${playerSelection}, Opponent chose: ${computerSelection}\)`;
+    resultsLog.appendChild(resultText);
+}
+
 function resetScore() {
     score.gamesWon = 0;
     score.gamesLost = 0;
     score.gamesTied = 0;
     scoreDisplay.textContent = `Player: ${score.gamesWon}, Computer: ${score.gamesLost}, Ties: ${score.gamesTied}`;
-    return
+    resultsLog.replaceChildren();
+    return;
 }

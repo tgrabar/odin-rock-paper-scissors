@@ -5,11 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="rps.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button data-choice="Rock" class="rpsbtn">Rock</button>
-    <button data-choice="Paper" class="rpsbtn" >Paper</button>
-    <button data-choice="Scissors" class="rpsbtn">Scissors</button>
+    <h1>Rock/Paper/Scissors</h1>
+    <p>Make your selection:</p>
+    <div class="player-choices">
+        <div data-choice="Rock" class="rpsbtn">
+            <p>Rock</p>
+            <img src="./images/rock.png">
+        </div>
+        <div data-choice="Paper" class="rpsbtn" >
+            <p>Paper</p>
+            <img src="./images/paper.png">            
+        </div>
+        <div data-choice="Scissors" class="rpsbtn">
+            <p>Scissors</p>
+            <img src="./images/scissors.png">            
+        </div>
+    </div>
     <button class="reset-btn">Reset</button>
     <p class="score-display">Hello</p>
     <div class="results-log"></div>

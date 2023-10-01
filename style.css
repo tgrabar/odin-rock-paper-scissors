@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+.player-choices {
+  display: flex;
+  gap: 1rem;
+}
+
+.rpsbtn {
+  width: 250px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+.rpsbtn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: lightgrey;
+}
+
+.reset-btn {
+  margin: 1rem 0rem;
+  padding: 1rem 2rem;
+  border: none;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.result-win {
+  color: green;
+}
+
+.result-loss {
+  color: red;
+}
