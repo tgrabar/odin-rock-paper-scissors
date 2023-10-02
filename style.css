@@ -1,41 +1,49 @@
 * {
+  background-color: black;
+  color: white;
+  font-size: 20px;
   box-sizing: border-box;
 }
 
 .player-choices {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .rpsbtn {
   width: 250px;
-  font-size: 20px;
   font-weight: bold;
   text-align: center;
-  border: 1px solid;
-  border-radius: 10px;
+  border: 2px solid white;
+  border-radius: 20px;
 }
 
 .rpsbtn:hover {
   cursor: pointer;
   text-decoration: underline;
-  background-color: lightgrey;
+  border: 2px solid red;
+}
+
+.score-display {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 2rem;
 }
 
 .reset-btn {
   margin: 1rem 0rem;
   padding: 1rem 2rem;
   border: none;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   font-weight: bold;
-  font-size: 20px;
   border-radius: 20px;
   cursor: pointer;
 }
 
 .result-win {
-  color: green;
+  color: lightgreen;
 }
 
 .result-loss {
