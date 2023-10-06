@@ -1,9 +1,9 @@
 const score = {
-    gamesWon: 0,
-    gamesLost: 0,
-    gamesTied: 0,
+    Win: 0,
+    Loss: 0,
+    Tie: 0,
     gamesPlayed: function() {
-        return this.gamesWon + this.gamesLost + this.gamesTied;
+        return this.Win + this.Loss + this.Tie;
     }
 };
 
@@ -33,50 +33,39 @@ function getComputerChoice() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
-    // game over after 5 wins/losses
-    if (score.gamesWon >= 5 || score.gamesLost >= 5) return;
+const choices = {
+    Rock: { Rock: 'Tie', Paper: 'Loss', Scissors: 'Win' },
+    Paper: { Rock: 'Win', Paper: 'Tie', Scissors: 'Loss' },
+    Scissors: { Rock: 'Loss', Paper: 'Win', Scissors: 'Tie' }
+}
 
-    // check for ties first
-    if (playerSelection === computerSelection) {
-        updateScore('gamesTied');
-        addResult('Tie', playerSelection, computerSelection);
-    }        
-    // check loss conditions
-    else if (
-        (playerSelection === 'Rock' && computerSelection === 'Paper') ||
-        (playerSelection === 'Paper' && computerSelection === 'Scissors') ||
-        (playerSelection === 'Scissors' && computerSelection === 'Rock')
-    ) {
-        updateScore('gamesLost');
-        addResult('Loss', playerSelection, computerSelection);
-    }        
-    else {
-        updateScore('gamesWon');
-        addResult('Win', playerSelection, computerSelection);
-    }
-    return;
+function playRound(playerChoice, computerChoice) {
+    // game over after 5 wins/losses
+    if (score.Win >= 5 || score.Loss >= 5) return;
+
+    updateScore(choices[playerChoice][computerChoice]);
+    addResult(choices[playerChoice][computerChoice], playerChoice, computerChoice);
 }
 
 function updateScore(result) {
     score[result]++;
-    wins.textContent = `Player: ${score.gamesWon}`;
-    losses.textContent =  `Computer: ${score.gamesLost}`;
-    ties.textContent = `Ties: ${score.gamesTied}`;
+    wins.textContent = `Player: ${score.Win}`;
+    losses.textContent =  `Computer: ${score.Loss}`;
+    ties.textContent = `Ties: ${score.Tie}`;
 }
 
-function addResult(gameResult, playerSelection, computerSelection) {
+function addResult(gameResult, playerChoice, computerChoice) {
     const resultText = document.createElement('div');
     resultText.classList.add('result-' + gameResult.toLowerCase());
-    resultText.textContent = `Game ${score.gamesPlayed()}: ` + gameResult + ` (You chose: ${playerSelection}, Opponent chose: ${computerSelection}\)`;
+    resultText.textContent = `Game ${score.gamesPlayed()}: ` + gameResult + ` (You chose: ${playerChoice}, Opponent chose: ${computerChoice}\)`;
     resultsLog.appendChild(resultText);
     
-    if(score.gamesWon === 5 || score.gamesLost === 5) addWinner();
+    if(score.Win === 5 || score.Loss === 5) addWinner();
 }
 
 function addWinner() {
     const resultText = document.createElement('div');
-    if (score.gamesWon === 5)
+    if (score.Win === 5)
         resultText.textContent = 'You win!';
     else
         resultText.textContent = 'Computer wins!';
@@ -84,12 +73,11 @@ function addWinner() {
 }
 
 function resetScore() {
-    score.gamesWon = 0;
-    score.gamesLost = 0;
-    score.gamesTied = 0;
+    score.Win = 0;
+    score.Loss = 0;
+    score.Tie = 0;
     wins.textContent = `Player: 0`;
     losses.textContent =  `Computer: 0`;
     ties.textContent = `Ties: 0`;
     resultsLog.replaceChildren();
-    return;
 }
